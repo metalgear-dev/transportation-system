@@ -54,6 +54,10 @@ jobs:
         with:
           arguments: '--max-line-length=120 --ignore=E501'
       - name: Run tests
+        env:
+          DEBUG: off
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.DATEBASE_URL }}
         run: coverage run ./manage.py rest
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
