@@ -21,9 +21,9 @@ class Provider(models.Model):
 class Area(models.Model):
     name = models.CharField('name', max_length=100)
     price = models.DecimalField('price', max_digits=12, decimal_places=2)
-    region = gis_models.MultiPolygonField(blank=True, null=True)
+    region = gis_models.PolygonField('region', blank=True, null=True)
     provider = models.ForeignKey(Provider, related_name='areas',
-                                 on_delete=models.CASCADE, null=True, verbose_name='areas')
+                                 on_delete=models.CASCADE, verbose_name='areas')
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
