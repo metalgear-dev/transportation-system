@@ -17,7 +17,8 @@ class ProviderView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gene
         return self.create(request, *args, **kwargs)
 
 
-class ProviderDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+class ProviderDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
@@ -59,7 +60,8 @@ class AreaView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
         return self.create(request, *args, **kwargs)
 
 
-class AreaDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+class AreaDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, 
+    mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Area.objects.all()
     serializer_class = AreaSerializer
 
