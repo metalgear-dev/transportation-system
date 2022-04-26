@@ -1,3 +1,6 @@
+[![CI](https://github.com/david1992121/transportation-system/actions/workflows/ci.yml/badge.svg)](https://github.com/david1992121/transportation-system/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/david1992121/transportation-system/branch/main/graph/badge.svg?token=SIPRABNKN4)](https://codecov.io/gh/david1992121/transportation-system)
+
 # Transportation System
 
 This is the Django implementation of the backend API server for dealing with geographic data.

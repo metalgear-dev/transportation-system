@@ -6,7 +6,10 @@ from services.serializers import AreaSerializer, ProviderSerializer
 from django.contrib.gis.geos import fromstr
 
 
-class ProviderView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class ProviderView(
+        mixins.ListModelMixin,
+        mixins.CreateModelMixin,
+        generics.GenericAPIView):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
@@ -17,7 +20,8 @@ class ProviderView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gene
         return self.create(request, *args, **kwargs)
 
 
-class ProviderDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+class ProviderDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                         mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
@@ -37,7 +41,10 @@ class ProviderDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mix
         return self.destroy(request, *args, **kwargs)
 
 
-class AreaView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class AreaView(
+        mixins.ListModelMixin,
+        mixins.CreateModelMixin,
+        generics.GenericAPIView):
     queryset = Area.objects.all()
     serializer_class = AreaSerializer
 
@@ -59,7 +66,8 @@ class AreaView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
         return self.create(request, *args, **kwargs)
 
 
-class AreaDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+class AreaDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Area.objects.all()
     serializer_class = AreaSerializer
 
