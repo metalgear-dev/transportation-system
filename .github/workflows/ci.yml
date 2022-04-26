@@ -44,6 +44,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run migrations
+        env:
+          DEBUG: off
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.DATEBASE_URL }}
         run: python manage.py migrate
       - name: 'Run PEP8'
         uses: quentinguidee/pep8-action@v1
