@@ -6,7 +6,6 @@ This is the Django implementation of the backend API server for dealing with geo
 
 - Provider management
 - Service Area management
-- PostGIS database
 
 ## Polygon Area Management
 
