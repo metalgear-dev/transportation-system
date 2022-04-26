@@ -1,5 +1,5 @@
 
-from services.views import AreaView, AreaDetailView, ProviderView, ProviderDetailView
+from services.views import *
 from django.urls import path
 
 urlpatterns = [
