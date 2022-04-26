@@ -3,6 +3,9 @@ from django.contrib.gis.db import models as gis_models
 
 
 class Provider(models.Model):
+    def __str__(self):
+        return self.name if self.name else self.email
+
     name = models.CharField('name', null=True, blank=True, max_length=100)
     email = models.EmailField('email', unique=True, max_length=100)
     phone_number = models.CharField(
@@ -19,6 +22,9 @@ class Provider(models.Model):
 
 
 class Area(models.Model):
+    def __str__(self):
+        return self.name
+
     name = models.CharField('name', max_length=100)
     price = models.DecimalField('price', max_digits=12, decimal_places=2)
     region = gis_models.PolygonField('region', blank=True, null=True)
