@@ -58,6 +58,6 @@ jobs:
           DEBUG: off
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATEBASE_URL }}
-        run: coverage run ./manage.py test
+        run: coverage run manage.py test
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
