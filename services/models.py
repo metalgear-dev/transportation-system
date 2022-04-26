@@ -28,4 +28,4 @@ class Area(models.Model):
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
     class Meta:
-        verbose_name = "Service Areas"
+        verbose_name = "Service Area"
