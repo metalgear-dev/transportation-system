@@ -3,18 +3,17 @@
 
 # Transportation System
 
-This is the Django implementation of the backend API server for dealing with geographic data.
+This is the Django implementation of the backend API server for dealing with geographic data using PostGIS.
 
 ## Overview
 
-- Provider management
+- Provider management  
 - Service Area management
+- Swagger API documentation
 
 ## Polygon Area Management
 
-GeoDjango is used to implement CRUD of polygon service areas. The used database is the postgresql with PostGIS.
-
-The sample API methods for polygon areas are as follows. Swagger is used for API documentation.
+The sample API methods for polygon areas are as follows.
 
 - POST
 
