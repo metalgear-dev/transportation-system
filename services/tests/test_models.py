@@ -4,75 +4,102 @@ from django.contrib.gis.geos import Polygon
 
 
 class ProviderModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
-        Provider.objects.create(email='blabla@gmail.com',
-                                name='blabla', language='japanese')
-        return super().setUpTestData()
+    def setUp(self):
+        self.provider = Provider.objects.create(email='provider@gmail.com',
+                                                name='provider', language='japanese')
+
+    def test_str(self):
+        self.assertEqual(str(self.provider), "provider")
 
     def test_email(self):
-        provider = Provider.objects.get(pk=1)
-        field_label = provider._meta.get_field('email').verbose_name
-        self.assertEqual(field_label, 'email')
-        self.assertEqual(provider.email, "blabla@gmail.com")
+        meta_data = self.provider._meta.get_field('email')
+        self.assertEqual(meta_data.verbose_name, 'email')
+        self.assertEqual(meta_data.unique, True)
+        self.assertEqual(meta_data.null, False)
+        self.assertEqual(meta_data.blank, False)
+        self.assertEqual(self.provider.email, "provider@gmail.com")
 
     def test_name(self):
-        provider = Provider.objects.get(pk=1)
-        field_label = provider._meta.get_field('name').verbose_name
-        self.assertEqual(field_label, 'name')
-        max_length = provider._meta.get_field('name').max_length
-        self.assertEqual(max_length, 100)
-        self.assertEqual(provider.name, "blabla")
+        meta_data = self.provider._meta.get_field('name')
+        self.assertEqual(meta_data.verbose_name, 'name')
+        self.assertEqual(meta_data.max_length, 100)
+        self.assertEqual(meta_data.null, True)
+        self.assertEqual(meta_data.blank, True)
+        self.assertEqual(self.provider.name, "provider")
 
     def test_language(self):
-        provider = Provider.objects.get(pk=1)
-        field_label = provider._meta.get_field('language').verbose_name
-        self.assertEqual(field_label, 'language')
-        max_length = provider._meta.get_field('language').max_length
-        self.assertEqual(max_length, 20)
-        self.assertEqual(provider.language, "japanese")
+        meta_data = self.provider._meta.get_field('language')
+        self.assertEqual(meta_data.verbose_name, 'language')
+        self.assertEqual(meta_data.max_length, 20)
+        self.assertEqual(meta_data.null, True)
+        self.assertEqual(meta_data.blank, True)
+        self.assertEqual(self.provider.language, "japanese")
 
     def test_currency(self):
-        provider = Provider.objects.get(pk=1)
-        field_label = provider._meta.get_field('currency').verbose_name
-        self.assertEqual(field_label, 'currency')
-        max_length = provider._meta.get_field('currency').max_length
-        self.assertEqual(max_length, 5)
-        self.assertEqual(provider.currency, None)
+        meta_data = self.provider._meta.get_field('currency')
+        self.assertEqual(meta_data.verbose_name, 'currency')
+        self.assertEqual(meta_data.max_length, 5)
+        self.assertEqual(meta_data.null, True)
+        self.assertEqual(meta_data.blank, True)
+        self.assertEqual(self.provider.currency, None)
+
+    def test_created_at(self):
+        meta_data = self.provider._meta.get_field('created_at')
+        self.assertEqual(meta_data.verbose_name, 'created_at')
+        self.assertEqual(meta_data.auto_now_add, True)
+        self.assertEqual(meta_data.auto_now, True)
+
+    def test_created_at(self):
+        meta_data = self.provider._meta.get_field('updated_at')
+        self.assertEqual(meta_data.verbose_name, 'updated_at')
+        self.assertEqual(meta_data.auto_now_add, False)
+        self.assertEqual(meta_data.auto_now, True)
 
 
-class ProviderModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
-        Provider.objects.create(email='blabla@gmail.com',
-                                name='blabla', language='japanese')
-        Area.objects.create(provider_id=1, name="area-1", price=24.35,
-                            region='POLYGON((0 0, 0 50, 50 50, 50 0, 0 0))')
-        return super().setUpTestData()
+class AreaModelTest(TestCase):
+    def setUp(self):
+        self.provider = Provider.objects.create(email='provider@gmail.com',
+                                                name='provider', language='japanese')
+        self.area = Area.objects.create(provider=self.provider, name="area-1", price=24.35,
+                                        region='POLYGON((0 0, 0 50, 50 50, 50 0, 0 0))')
+
+    def test_str(self):
+        self.assertEqual(str(self.area), "area-1")
 
     def test_provider(self):
-        area = Area.objects.get(pk=1)
-        self.assertEqual(area.provider.pk, 1)
+        self.assertEqual(self.area.provider.pk, self.provider.pk)
 
     def test_name(self):
-        area = Area.objects.get(pk=1)
-        field_label = area._meta.get_field('name').verbose_name
-        self.assertEqual(field_label, 'name')
-        max_length = area._meta.get_field('name').max_length
-        self.assertEqual(max_length, 100)
-        self.assertEqual(area.name, "area-1")
+        meta_data = self.area._meta.get_field('name')
+        self.assertEqual(meta_data.verbose_name, 'name')
+        self.assertEqual(meta_data.null, False)
+        self.assertEqual(meta_data.blank, False)
+        self.assertEqual(self.area.name, "area-1")
 
     def test_price(self):
-        area = Area.objects.get(pk=1)
-        field_label = area._meta.get_field('price').verbose_name
-        self.assertEqual(field_label, 'price')
-        max_digits = area._meta.get_field('price').max_digits
-        self.assertEqual(max_digits, 12)
-        decimal_places = area._meta.get_field('price').decimal_places
-        self.assertEqual(decimal_places, 2)
+        meta_data = self.area._meta.get_field('price')
+        self.assertEqual(meta_data.verbose_name, 'price')
+        self.assertEqual(meta_data.null, False)
+        self.assertEqual(meta_data.blank, False)
+        self.assertEqual(meta_data.max_digits, 12)
+        self.assertEqual(meta_data.decimal_places, 2)
+        self.assertEqual(self.area.price, 24.35)
 
     def test_region(self):
-        area = Area.objects.get(pk=1)
-        field_label = area._meta.get_field('region').verbose_name
-        self.assertEqual(field_label, 'region')
-        self.assertTrue(isinstance(area.region, Polygon))
+        meta_data = self.area._meta.get_field('region')
+        self.assertEqual(meta_data.verbose_name, 'region')
+        self.assertEqual(meta_data.null, True)
+        self.assertEqual(meta_data.blank, True)
+        self.assertTrue(isinstance(self.area.region, Polygon))
+
+    def test_created_at(self):
+        meta_data = self.area._meta.get_field('created_at')
+        self.assertEqual(meta_data.verbose_name, 'created_at')
+        self.assertEqual(meta_data.auto_now_add, True)
+        self.assertEqual(meta_data.auto_now, True)
+
+    def test_created_at(self):
+        meta_data = self.area._meta.get_field('updated_at')
+        self.assertEqual(meta_data.verbose_name, 'updated_at')
+        self.assertEqual(meta_data.auto_now_add, False)
+        self.assertEqual(meta_data.auto_now, True)
