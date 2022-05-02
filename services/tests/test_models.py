@@ -96,9 +96,9 @@ class AreaModelTest(TestCase):
         meta_data = self.area._meta.get_field('created_at')
         self.assertEqual(meta_data.verbose_name, 'created_at')
         self.assertEqual(meta_data.auto_now_add, True)
-        self.assertEqual(meta_data.auto_now, True)
+        self.assertEqual(meta_data.auto_now, False)
 
-    def test_created_at(self):
+    def test_updated_at(self):
         meta_data = self.area._meta.get_field('updated_at')
         self.assertEqual(meta_data.verbose_name, 'updated_at')
         self.assertEqual(meta_data.auto_now_add, False)
