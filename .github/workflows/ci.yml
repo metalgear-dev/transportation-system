@@ -47,7 +47,7 @@ jobs:
         env:
           DEBUG: off
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATEBASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python manage.py migrate
       - name: 'Run PEP8'
         uses: quentinguidee/pep8-action@v1
@@ -57,7 +57,7 @@ jobs:
         env:
           DEBUG: off
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATEBASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: coverage run manage.py test
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
