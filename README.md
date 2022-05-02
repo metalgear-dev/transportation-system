@@ -9,6 +9,11 @@ This is the Django implementation of the backend API server for dealing with geo
 
 - Provider management  
 - Service Area management
+
+## Main Features
+
+- DRF RestAPI
+- PostGIS (PostgreSQL + GIS)
 - Swagger API documentation
 
 ## Polygon Area Management
