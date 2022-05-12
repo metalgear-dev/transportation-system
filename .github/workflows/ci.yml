@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgis/postgis:10-2.5
+        image: postgis/postgis:13-3.2
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -49,10 +49,10 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATEBASE_URL }}
         run: python manage.py migrate
-      - name: 'Run PEP8'
+      - name: "Run PEP8"
         uses: quentinguidee/pep8-action@v1
         with:
-          arguments: '--max-line-length=120 --ignore=E501'
+          arguments: "--max-line-length=120 --ignore=E501"
       - name: Run tests
         env:
           DEBUG: off
